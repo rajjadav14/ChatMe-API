@@ -1,0 +1,39 @@
+{
+  "name": "chatme-api",
+  "version": "1.0.0",
+  "description": "chat api backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajjadav14/ChatMe-API.git"
+  },
+  "author": "rajdeep",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rajjadav14/ChatMe-API/issues"
+  },
+  "homepage": "https://github.com/rajjadav14/ChatMe-API#readme",
+  "dependencies": {
+    "@types/express": "^4.17.15",
+    "@types/node": "^18.11.18",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "helmet": "^6.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "^4.13.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typeorm": "^0.3.11",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/jsonwebtoken": "^9.0.0",
+    "typescript": "^4.9.4"
+  }
+}
