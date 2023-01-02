@@ -1,31 +1,35 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
+import { IUser } from "../utils/interfaces";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import userService from "../services/userServices";
 
 export const Login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  const user = false;
+  const user = true;
 
   if (user) {
     res.json({
       sucess: "true",
     });
   } else {
-    res.status(401);
-    throw new Error("Invalid Email or Password");
+    res.status(401).send("Invalid Email or Password");
   }
 };
 
-export const SignUp = async (req: Request, res: Response) => {
-  const { email, password, name } = req.body;
+export const SignUp = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email, password, name }: IUser = req.body;
 
-  const user = false;
+  const emailExists = await userService.getUserByEmail(email);
 
-  if (user) {
-    res.json({
-      sucess: "true",
-    });
-  } else {
-    res.status(401);
-    throw new Error("Invalid Email or Password");
-  }
+  if (emailExists)
+    res.status(StatusCodes.BAD_GATEWAY).send({ Error: "Email already exists" });
+
+  const newUser = await userService.saveUser({ email, password, name });
+
+  return res.send(newUser);
 };
