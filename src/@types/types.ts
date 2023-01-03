@@ -3,8 +3,14 @@ export interface IUser {
   email: string;
   password: string;
   createdAt?: Date;
-  updatedAt?: Date;
+  lastLoggedIn?: Date;
 }
+
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
 export interface IError {
   status: number;
   fields: {

@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../database/connection";
 import { User } from "../database/entity/userEntity";
-import { IUser } from "../utils/interfaces";
+import { IUser } from "../@types/types";
 
 const UserRepo: Repository<User> = AppDataSource.getRepository(User);
 
