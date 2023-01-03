@@ -1,20 +1,21 @@
 import { NextFunction, Request, Response } from "express";
-import { IUser } from "../utils/interfaces";
+import { ILogin, IUser } from "../@types/types";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import userService from "../services/userServices";
+import response from "../utils/responseCreater";
 
 export const Login = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { email, password }: ILogin = req.body;
 
-  const user = true;
+  const user = await userService.getUserByEmail(email);
 
-  if (user) {
-    res.json({
-      sucess: "true",
-    });
-  } else {
-    res.status(401).send("Invalid Email or Password");
-  }
+  if (!user || user.password !== password)
+    response.sendResponse(
+      true,
+      res,
+      "Invalid username or password",
+      StatusCodes.BAD_REQUEST
+    );
 };
 
 export const SignUp = async (

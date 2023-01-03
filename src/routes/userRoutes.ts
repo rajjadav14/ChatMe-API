@@ -10,6 +10,6 @@ const router = express.Router();
 //router.route("/").get(isAuthenticatedUser, allUsers);
 //router.route("/").post(registerUser);
 router.post("/login", validateBody(loginBody), errorWrapper(Login));
-router.post("/signup", validateBody(signUpBody), SignUp);
+router.post("/signup", validateBody(signUpBody), errorWrapper(SignUp));
 
 export default router;
