@@ -1,8 +1,11 @@
 import { Request, Response, NextFunction } from "express";
+import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
+import { IAuthRequest, IJWTPayload } from "../@types/types";
+import response from "../utils/responseCreater";
 
 const isAuthenticatedUser = async (
-  req: Request,
+  req: IAuthRequest,
   res: Response,
   next: NextFunction
 ) => {
@@ -14,26 +17,30 @@ const isAuthenticatedUser = async (
   ) {
     try {
       token = req.headers.authorization.split(" ")[1];
-
       //decodes token id
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || "");
+      const decoded = jwt.verify(
+        token,
+        process.env.JWT_SECRET || ""
+      ) as IJWTPayload;
 
-      //req.user = await User.findById(decoded.id).select("-password");
-
-      next();
+      req.userId = decoded.userId;
     } catch (error) {
-      res.status(401).send({
-        message: "Not authorized, token failed",
-      });
-      throw new Error("Not authorized, token failed");
+      response.sendResponse(
+        true,
+        res,
+        "Not authorized, token failed",
+        StatusCodes.UNAUTHORIZED
+      );
     }
   }
 
   if (!token) {
-    res.status(401).send({
-      message: "Not authorized, no token",
-    });
-    throw new Error("Not authorized, no token");
+    response.sendResponse(
+      true,
+      res,
+      "Not authorized, no token",
+      StatusCodes.UNAUTHORIZED
+    );
   }
 };
 

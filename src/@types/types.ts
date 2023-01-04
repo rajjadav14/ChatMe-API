@@ -1,9 +1,21 @@
+import { Request } from "express";
+
 export interface IUser {
   name: string;
   email: string;
   password: string;
   createdAt?: Date;
   lastLoggedIn?: Date;
+}
+
+export interface IJWTPayload {
+  userId: string;
+  name: string;
+  iat: number;
+  exp: number;
+}
+export interface IAuthRequest extends Request {
+  userId?: string;
 }
 
 export interface ILogin {

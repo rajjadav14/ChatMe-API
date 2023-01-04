@@ -1,5 +1,5 @@
 import express from "express";
-import { Login, SignUp } from "../controllers/userController";
+import { Demo, Login, SignUp } from "../controllers/userController";
 import isAuthenticatedUser from "../middlewares/isAuthicatedUser";
 import errorWrapper from "../utils/errorWrapper";
 import { validateBody } from "../validations/requestBodyValidations";
@@ -10,6 +10,7 @@ const router = express.Router();
 //router.route("/").get(isAuthenticatedUser, allUsers);
 //router.route("/").post(registerUser);
 router.post("/login", validateBody(loginBody), errorWrapper(Login));
+//router.get("/demo", isAuthenticatedUser, errorWrapper(Demo));
 router.post("/signup", validateBody(signUpBody), errorWrapper(SignUp));
 
 export default router;

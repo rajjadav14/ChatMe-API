@@ -5,7 +5,7 @@ class response {
   static createResponse() {
     return JSON.parse(
       JSON.stringify({
-        status: 1,
+        status: 0,
         data: {},
         message: "",
         success: false,
@@ -28,7 +28,7 @@ class response {
       responseObject.message = message || ReasonPhrases.INTERNAL_SERVER_ERROR;
     } else {
       responseObject.success = true;
-      responseObject.status = status || StatusCodes.OK;
+      responseObject.status = StatusCodes.OK;
       responseObject.message = message || ReasonPhrases.OK;
       responseObject.data = data;
     }
