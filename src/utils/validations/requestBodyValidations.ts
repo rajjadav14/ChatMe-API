@@ -11,7 +11,7 @@ export function validateBody(schema: yup.ObjectSchema<any>) {
       req.body = validatedBody;
       next();
     } catch (err: any) {
-      res.status(401).send("Invalid Email or Password 1");
+      res.status(401).send(`Invalid Request body: ${err.message}`);
     }
   };
 }

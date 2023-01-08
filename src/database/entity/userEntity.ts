@@ -10,7 +10,7 @@ import { ObjectId } from "mongodb";
 import { IUser } from "../../@types/types";
 
 @Entity()
-export class User extends BaseEntity implements IUser {
+export default class User extends BaseEntity implements IUser {
   @ObjectIdColumn()
   _id: ObjectId;
 
@@ -23,12 +23,13 @@ export class User extends BaseEntity implements IUser {
   @Column()
   password: string;
 
-  @CreateDateColumn({ type: "timestamp", default: () => "NOW()" })
+  @CreateDateColumn({ type: "timestamp" })
   createdAt?: Date;
 
   @UpdateDateColumn({
     type: "timestamp",
     nullable: true,
+    default: () => "NOW()",
   })
   lastLoggedIn?: Date;
 

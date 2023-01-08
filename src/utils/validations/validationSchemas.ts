@@ -10,3 +10,9 @@ export const signUpBody = yup.object().shape({
   name: yup.string().required(),
   password: yup.string().trim().required().min(8),
 });
+
+export const sendMessageBody = yup.object().shape({
+  sender: yup.string().required(),
+  receiver: yup.string().required(),
+  content: yup.string().required(),
+});

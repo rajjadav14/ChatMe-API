@@ -24,6 +24,7 @@ const isAuthenticatedUser = async (
       ) as IJWTPayload;
 
       req.userId = decoded.userId;
+      next();
     } catch (error) {
       response.sendResponse(
         true,
