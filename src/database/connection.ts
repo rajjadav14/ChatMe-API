@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
-import { Message } from "./entity/messageEntity";
-import { User } from "./entity/userEntity";
+import ChatMessage from "./entity/messageEntity";
+import User from "./entity/userEntity";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -13,7 +13,7 @@ export const AppDataSource = new DataSource({
   useUnifiedTopology: true,
   synchronize: true,
   logging: true,
-  entities: [User, Message],
+  entities: [User, ChatMessage],
   subscribers: [],
   migrations: [],
 });

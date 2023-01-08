@@ -2,9 +2,10 @@ import express from "express";
 import helmet from "helmet";
 import cors from "cors";
 import dotenv from "dotenv";
-import userRoutes from "./routes/userRoutes";
+import userRoutes from "./routes/userRoute";
+import chatRoutes from "./routes/chatRoute";
 import { AppDataSource } from "./database/connection";
-import errorHandler from "./middlewares/errorHandler";
+import errorHandler from "./middleware/errorHandler";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(helmet());
 
 // Routes
 app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
 
 // add the middleware to handle error, make sure to add if after registering routes method
 app.use(errorHandler);

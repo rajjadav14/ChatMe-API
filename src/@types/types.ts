@@ -1,6 +1,8 @@
 import { Request } from "express";
+import { ObjectId } from "mongodb";
 
 export interface IUser {
+  _id?: ObjectId;
   name: string;
   email: string;
   password: string;
@@ -14,6 +16,7 @@ export interface IJWTPayload {
   iat: number;
   exp: number;
 }
+
 export interface IAuthRequest extends Request {
   userId?: string;
 }
@@ -21,6 +24,14 @@ export interface IAuthRequest extends Request {
 export interface ILogin {
   email: string;
   password: string;
+}
+
+export interface IChatMessage {
+  _id?: ObjectId;
+  sender: string;
+  receiver: string;
+  content: string;
+  date_time?: Date;
 }
 
 export interface IError {

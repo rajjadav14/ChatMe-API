@@ -2,13 +2,14 @@ import { NextFunction, Request, Response } from "express";
 import { ILogin, IUser } from "../@types/types";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
 import jwt from "jsonwebtoken";
-import userService from "../services/userServices";
+import userService from "../services/userService";
 import response from "../utils/responseCreater";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 export const Login = async (req: Request, res: Response) => {
+  console.log("in side login");
   const { email, password }: ILogin = req.body;
 
   const user = await userService.getUserByEmail(email);
@@ -50,5 +51,7 @@ export const SignUp = async (
 
   const newUser = await userService.saveUser({ email, password, name });
 
-  return res.send(newUser);
+  response.sendResponse(false, res, ReasonPhrases.OK, StatusCodes.OK, {
+    newUser,
+  });
 };
