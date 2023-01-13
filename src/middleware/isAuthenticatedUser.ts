@@ -23,7 +23,7 @@ const isAuthenticatedUser = async (
         process.env.JWT_SECRET || ""
       ) as IJWTPayload;
 
-      req.userId = decoded.userId;
+      req.email = decoded.email;
       next();
     } catch (error) {
       response.sendResponse(

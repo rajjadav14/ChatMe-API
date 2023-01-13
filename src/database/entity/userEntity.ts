@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
+  Index,
 } from "typeorm";
 import { ObjectId } from "mongodb";
 import { IUser } from "../../@types/types";
@@ -18,6 +19,7 @@ export default class User extends BaseEntity implements IUser {
   name: string;
 
   @Column()
+  @Index({ unique: true })
   email: string;
 
   @Column()
