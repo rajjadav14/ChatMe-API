@@ -1,5 +1,5 @@
 import express from "express";
-import { sendMessage } from "../controllers/chatController";
+import { sendMessage, loadContacts } from "../controllers/chatController";
 import { Login, SignUp } from "../controllers/userController";
 import isAuthenticatedUser from "../middleware/isAuthenticatedUser";
 import errorWrapper from "../utils/errorWrapper";
@@ -12,11 +12,15 @@ import {
 const router = express.Router();
 
 router
-  .route("/sendmessage")
+  .route("/send-message")
   .post(
     validateBody(sendMessageBody),
     isAuthenticatedUser,
     errorWrapper(sendMessage)
   );
+
+router
+  .route("/load-contacts")
+  .get(isAuthenticatedUser, errorWrapper(loadContacts));
 
 export default router;

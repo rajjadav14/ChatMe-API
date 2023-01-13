@@ -4,7 +4,7 @@ import { IChatMessage } from "../../@types/types";
 
 @Entity("chatMessage")
 export default class ChatMessage extends BaseEntity implements IChatMessage {
-  @ObjectIdColumn()
+  @ObjectIdColumn({ nullable: false })
   _id: ObjectId;
 
   @Column()

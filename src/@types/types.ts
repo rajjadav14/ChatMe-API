@@ -12,13 +12,13 @@ export interface IUser {
 
 export interface IJWTPayload {
   userId: string;
-  name: string;
+  email: string;
   iat: number;
   exp: number;
 }
 
 export interface IAuthRequest extends Request {
-  userId?: string;
+  email?: string;
 }
 
 export interface ILogin {

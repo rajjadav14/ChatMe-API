@@ -25,7 +25,7 @@ export const Login = async (req: Request, res: Response) => {
   const token = jwt.sign(
     {
       userId: user!._id,
-      name: user!.name,
+      email: user!.email,
       iat: Math.floor(Date.now() / 1000) - 30,
       exp: Math.floor(Date.now() / 1000) + 60 * 2,
     },
