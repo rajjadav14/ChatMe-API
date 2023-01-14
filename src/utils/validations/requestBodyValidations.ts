@@ -7,7 +7,6 @@ export function validateBody(schema: yup.ObjectSchema<any>) {
       const validatedBody = await schema.validate(req.body);
       // replace request body with validated schema object
       // so that default values are applied to the DTO
-      console.log(validateBody);
       req.body = validatedBody;
       next();
     } catch (err: any) {

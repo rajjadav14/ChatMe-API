@@ -9,7 +9,6 @@ const errorHandler = (
   next: NextFunction
 ) => {
   if (err) {
-    console.log(err.name, err.stack);
     response.sendResponse(true, res, err.message);
   }
   next();

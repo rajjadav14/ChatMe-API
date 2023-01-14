@@ -38,8 +38,7 @@ export const loadContacts = async (
   const uniqueContacts = await chatService.getUniqueContact(currentUser);
 
   for (const receiver of uniqueContacts) {
-    console.log(receiver);
-    const lastMessage = await chatService.getlastMessage(
+    const lastMessage = await chatService.getLastMessage(
       receiver.email,
       currentUser
     );
@@ -49,4 +48,17 @@ export const loadContacts = async (
   result.sort((a: any, b: any) => b.time - a.time);
 
   response.sendResponse(false, res, "ok", 200, { result });
+};
+
+export const loadChatbox = async (
+  req: IAuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const userEmail = req.email || "arpan@gmail.com";
+  const otherUser = req.query.contact as string;
+
+  const chatHistory = await chatService.getAllMessages(userEmail, otherUser);
+
+  response.sendResponse(false, res, "ok", 200, { chatHistory });
 };
