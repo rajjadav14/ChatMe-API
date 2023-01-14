@@ -9,7 +9,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const Login = async (req: Request, res: Response) => {
-  console.log("in side login");
   const { email, password }: ILogin = req.body;
 
   const user = await userService.getUserByEmail(email);

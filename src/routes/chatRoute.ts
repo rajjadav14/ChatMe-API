@@ -1,5 +1,9 @@
 import express from "express";
-import { sendMessage, loadContacts } from "../controllers/chatController";
+import {
+  sendMessage,
+  loadContacts,
+  loadChatbox,
+} from "../controllers/chatController";
 import { Login, SignUp } from "../controllers/userController";
 import isAuthenticatedUser from "../middleware/isAuthenticatedUser";
 import errorWrapper from "../utils/errorWrapper";
@@ -22,5 +26,7 @@ router
 router
   .route("/load-contacts")
   .get(isAuthenticatedUser, errorWrapper(loadContacts));
+
+router.route("/load-chatbox").get(loadChatbox);
 
 export default router;

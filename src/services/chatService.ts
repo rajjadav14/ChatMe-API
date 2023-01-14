@@ -16,7 +16,7 @@ class ChatService {
     return newUser;
   }
 
-  static async getlastMessage(receiver: string, sender: string) {
+  static async getLastMessage(receiver: string, sender: string) {
     const last = await ChatRepo.findOne({
       where: {
         $or: [
@@ -26,8 +26,6 @@ class ChatService {
       },
       order: { date_time: "DESC" },
     });
-
-    console.log(last);
 
     return { content: last!.content, time: last!.date_time };
   }
@@ -40,10 +38,23 @@ class ChatService {
     for (const email of emails) {
       const userName = (await UserService.getUserNameByEmail(email)) as string;
       contacts.push({ userName, email });
-      console.log(userName, "dsa");
     }
 
     return contacts;
+  }
+
+  static async getAllMessages(user: string, otherUser: string) {
+    const chatHistory = await ChatRepo.find({
+      where: {
+        $or: [
+          { sender: user, receiver: otherUser },
+          { sender: otherUser, receiver: user },
+        ],
+      },
+      order: { date_time: "ASC" },
+    });
+
+    return chatHistory;
   }
 }
 
